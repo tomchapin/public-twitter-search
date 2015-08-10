@@ -1,4 +1,4 @@
-# Twitter Search Relay
+# Public Twitter Search
 This is a very light-weight app that allows you to search Twitter's publicly visible tweets,
 without needing an API key.
 
