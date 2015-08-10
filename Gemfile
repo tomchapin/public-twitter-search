@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.2.2'
+
 # Server gems
 gem 'rack', '~> 1.6.4'
 gem 'sinatra', '~> 1.4.6'
