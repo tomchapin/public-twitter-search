@@ -38,11 +38,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  nokogiri
+  nokogiri (~> 1.6.6.2)
   pry
-  rack
-  rest-client
-  sinatra
+  rack (~> 1.6.4)
+  rest-client (~> 1.8.0)
+  sinatra (~> 1.4.6)
   sinatra-cross_origin (~> 0.3.1)
 
 BUNDLED WITH
