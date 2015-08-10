@@ -7,10 +7,14 @@
 #
 require 'rubygems'
 require 'sinatra'
-require 'open-uri'
 require 'rest-client'
 require 'nokogiri'
-require 'pry'
+require 'json'
+require 'sinatra/cross_origin'
+
+configure do
+  enable :cross_origin
+end
 
 configure :production do
   # Configure stuff here you'll want to
@@ -20,21 +24,28 @@ configure :production do
   #       from ENV['DATABASE_URI'] (see /env route below)
 end
 
-# Quick test
+# Enable CORS
+options "*" do
+  response.headers["Allow"] = "HEAD,GET,PUT,DELETE,OPTIONS"
+
+  # Needed for AngularJS
+  response.headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept"
+
+  halt HTTP_STATUS_OK
+end
+
+# Root
 get '/' do
   "The source code for this app can be found here: https://github.com/tomchapin/twitter-search-relay"
 end
 
 # Search Twitter
 get '/search/?' do
-  content_type :json
-  keywords = params[:keyword] || params[:keywords]
-  if keywords.nil? || keywords.length == 0
-    { errors: 'Missing parameter: keyword (or keywords)' }.to_json
-  else
-    tweets = fetch_twitter_search_results(keywords)
-    tweets.to_json
-  end
+  handle_twitter_search
+end
+
+post '/search/?' do
+  handle_twitter_search
 end
 
 # Test at <appname>.heroku.com
@@ -49,6 +60,18 @@ end
 
 
 # Supplemental methods
+
+def handle_twitter_search
+  content_type :json
+
+  query = params[:query]
+  if query.nil? || query.length == 0
+    { errors: 'Missing parameter - query (example usage: /search?query=foo)' }.to_json
+  else
+    tweets = fetch_twitter_search_results(query)
+    tweets.to_json
+  end
+end
 
 def fetch_twitter_search_results(query)
   twitter_search_url = "https://twitter.com/search?f=tweets&vertical=default&q=#{query}&src=typd"

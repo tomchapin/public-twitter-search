@@ -1,4 +1,23 @@
-# Here is a sample/template sinatra application ready for deployment to [Heroku](http://heroku.com).
+# Twitter Search Relay
+This is a very light-weight app that allows you to search Twitter's publicly visible tweets,
+without needing an API key.
+
+It runs on Rack/Sinatra and uses the REST-client and Nokogiri gems to search Twitter and parse
+the HTML response page, converting the page of results into a JSON object.
+
+## Usage:
+
+1. Install dependencies, using ```bundle install```
+2. Run the app, using ```rackup config.ru```
+3. GET the Twitter search JSON endpoint:
+
+```
+http://localhost:9292/search?query=foo
+```
+
+## Deployment
+
+This app is ready for deployment to [Heroku](http://heroku.com).
 
 * Create an acount in seconds at [Heroku](http://heroku.com/signup).
 * Install the gem `sudo gem install heroku`.
