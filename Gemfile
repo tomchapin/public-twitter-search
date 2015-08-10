@@ -3,9 +3,11 @@ source 'https://rubygems.org'
 ruby '2.2.2'
 
 # Server gems
+gem 'puma', '~> 2.12.3'
 gem 'rack', '~> 1.6.4'
 gem 'sinatra', '~> 1.4.6'
 gem 'sinatra-cross_origin', '~> 0.3.1'
+gem 'sinatra-cache', '~> 0.3.7'
 
 # Fetching/Parsing Remote URLs
 gem 'rest-client', '~> 1.8.0'

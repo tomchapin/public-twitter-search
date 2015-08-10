@@ -5,13 +5,38 @@
 #
 # $ ruby heroku-sinatra-app.rb
 #
+
+# --------------------------------------------------------------------------------------------------
+# Require gems
+# --------------------------------------------------------------------------------------------------
+
 require 'rubygems'
+
 require 'sinatra'
+require 'sinatra/cache'
+require 'sinatra/cross_origin'
+
 require 'rest-client'
 require 'nokogiri'
 require 'json'
-require 'sinatra/cross_origin'
+require 'digest/md5'
+
 require 'pry'
+
+# --------------------------------------------------------------------------------------------------
+# Cache Configuration
+# --------------------------------------------------------------------------------------------------
+set :root, File.expand_path(File.dirname(__FILE__))
+
+register(Sinatra::Cache)
+
+set :cache_enabled, true
+set :cache_fragments_wrap_with_html_comments, false
+set :cache_page_extension, '.json'
+
+# --------------------------------------------------------------------------------------------------
+# Other Configuration
+# --------------------------------------------------------------------------------------------------
 
 configure do
   enable :cross_origin
@@ -25,9 +50,13 @@ configure :production do
   #       from ENV['DATABASE_URI'] (see /env route below)
 end
 
+# --------------------------------------------------------------------------------------------------
+# Routes
+# --------------------------------------------------------------------------------------------------
+
 # Enable CORS
 options "*" do
-  response.headers["Allow"] = "HEAD,GET,PUT,DELETE,OPTIONS"
+  response.headers["Allow"]                        = "HEAD,GET,PUT,DELETE,OPTIONS"
 
   # Needed for AngularJS
   response.headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept"
@@ -49,29 +78,26 @@ post '/search.?:format?/?' do
   handle_twitter_search
 end
 
-# Test at <appname>.heroku.com
-
-# You can see all your app specific information this way.
-# IMPORTANT! This is a very bad thing to do for a production
-# application with sensitive information
-
-# get '/env' do
-#   ENV.inspect
-# end
-
-
+# --------------------------------------------------------------------------------------------------
 # Supplemental methods
+# --------------------------------------------------------------------------------------------------
 
 def handle_twitter_search
+
   content_type :json, 'charset' => 'utf-8'
 
   query = params[:query]
   if query.nil? || query.length == 0
     { errors: 'Missing parameter - query (example usage: /search?query=foo)' }.to_json
   else
-    tweets = fetch_twitter_search_results(query)
-    tweets.to_json
+    query_md5 = Digest::MD5.hexdigest(query)
+
+    cache_fragment query_md5, expires_in: 15, shared: true do
+      tweets = fetch_twitter_search_results(query)
+      tweets.to_json
+    end
   end
+
 end
 
 def fetch_twitter_search_results(query)

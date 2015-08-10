@@ -8,11 +8,12 @@ the HTML response page, converting the page of results into a JSON object.
 ## Usage:
 
 1. Install dependencies, using ```bundle install```
-2. Run the app, using ```rackup config.ru```
-3. GET the Twitter search JSON endpoint:
+2. Install the foreman gem
+3. Run the app, using ```foreman start```
+4. GET the Twitter search JSON endpoint:
 
 ```
-http://localhost:9292/search.json?query=foo
+http://localhost:5000/search.json?query=foo
 ```
 
 ## Deployment
