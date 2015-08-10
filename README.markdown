@@ -20,7 +20,7 @@ http://localhost:5000/search.json?query=foo
 
 This app is ready for deployment to [Heroku](http://heroku.com).
 
-* Create an acount in seconds at [Heroku](http://heroku.com/signup).
+* Create an account in seconds at [Heroku](http://heroku.com/signup).
 * Install the gem `sudo gem install heroku`.
 * If you do not have an SSH key
 you'll need to [generate
