@@ -40,11 +40,11 @@ get '/' do
 end
 
 # Search Twitter
-get '/search/?' do
+get '/search.?:format?/?' do
   handle_twitter_search
 end
 
-post '/search/?' do
+post '/search.?:format?/?' do
   handle_twitter_search
 end
 

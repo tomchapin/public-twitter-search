@@ -12,7 +12,7 @@ the HTML response page, converting the page of results into a JSON object.
 3. GET the Twitter search JSON endpoint:
 
 ```
-http://localhost:9292/search?query=foo
+http://localhost:9292/search.json?query=foo
 ```
 
 ## Deployment
