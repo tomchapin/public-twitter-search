@@ -62,7 +62,7 @@ end
 # Supplemental methods
 
 def handle_twitter_search
-  content_type :json
+  content_type :json, 'charset' => 'utf-8'
 
   query = params[:query]
   if query.nil? || query.length == 0
