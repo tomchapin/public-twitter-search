@@ -26,7 +26,7 @@ you'll need to [generate
 one](http://heroku.com/docs/index.html#_setting_up_ssh_public_keys)
 and [tell Heroku about
 it](http://heroku.com/docs/index.html#_manage_keys_on_heroku)
-* Clone this repo `git clone git://github.com/sinatra/heroku-sinatra-app [appname]`
+* Clone this repo `git clone git@github.com:tomchapin/public-twitter-search.git [appname]`
 * `cd /path/to/project`
 * `heroku create [optional-app-name]` (You can rename your app with `heroku rename`)
 * `git push heroku master`
