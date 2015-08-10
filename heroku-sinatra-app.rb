@@ -11,6 +11,7 @@ require 'rest-client'
 require 'nokogiri'
 require 'json'
 require 'sinatra/cross_origin'
+require 'pry'
 
 configure do
   enable :cross_origin
