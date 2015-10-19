@@ -66,7 +66,7 @@ end
 
 # Root
 get '/' do
-  "The source code for this app can be found here: https://github.com/tomchapin/twitter-search-relay"
+  "The source code for this app can be found here: https://github.com/tomchapin/public-twitter-search"
 end
 
 # Search Twitter
