@@ -1,17 +1,18 @@
 source 'https://rubygems.org'
 
-ruby '2.2.2'
+ruby '2.5.1'
 
 # Server gems
-gem 'puma', '~> 2.12.3'
-gem 'rack', '~> 1.6.4'
-gem 'sinatra', '~> 1.4.6'
-gem 'sinatra-cross_origin', '~> 0.3.1'
-gem 'sinatra-cache', '~> 0.3.7'
+gem 'puma'
+gem 'rack'
+gem 'sinatra'
+gem 'sinatra-cross_origin'
+gem 'sinatra-cache'
+gem 'foreman'
 
 # Fetching/Parsing Remote URLs
-gem 'rest-client', '~> 1.8.0'
-gem 'nokogiri', '~> 1.6.6.2'
+gem 'rest-client'
+gem 'nokogiri'
 
 # Debugging
 gem 'pry'
