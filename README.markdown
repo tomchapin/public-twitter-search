@@ -2,8 +2,9 @@
 This is a very light-weight app that allows you to search Twitter's publicly visible tweets,
 without needing an API key.
 
-It runs on Rack/Sinatra and uses the REST-client and Nokogiri gems to search Twitter and parse
-the HTML response page, converting the page of results into a JSON object.
+It runs on Rack/Sinatra and uses the REST-client and Nokogiri gems to search the Twitter web site
+and parse the HTML response page, converting the page of results into a JSON object.
+By searching in this manner, it completely bypasses the Twitter API (and all of their API restrictions).
 
 ## Usage:
 
